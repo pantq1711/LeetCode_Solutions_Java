@@ -1,29 +1,15 @@
-# Java/Gradle build files
 .gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.properties
 
-# Gradle executables
 gradlew
 gradlew.bat
-HELP.md
 
-# IDEs (IntelliJ, VS Code, STS)
 .idea/
 *.iws
 *.iml
 *.ipr
 out/
 .vscode/
-.settings/
-.classpath
-.project
-.factorypath
-.springBeans
-.sts4-cache
 bin/
-
-# OS files
-.DS_Store
-Thumbs.db
