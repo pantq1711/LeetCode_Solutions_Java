@@ -5,4 +5,5 @@ class Solution {
         for(char c : t.toCharArray()) x ^= c;
         return x;
     }
+
 }
