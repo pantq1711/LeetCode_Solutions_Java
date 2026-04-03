@@ -1,22 +1,11 @@
 class Solution {
     public int[] sortArrayByParity(int[] nums) {
+        int[] res = new int[nums.length];
         int l = 0, r = nums.length - 1;
-        while(l < r){
-            if(nums[l] % 2 == 0){
-                l++;
-            }
-            else if(nums[r] % 2 == 1){
-                r--;
-            }
-            else {
-                int tmp = nums[l];
-                nums[l] = nums[r];
-                nums[r] = tmp;
-                l++;
-                r--;
-            }
+        for(int num : nums){
+            if(num % 2 == 0) res[l++] = num;
+            else res[r--] = num;
         }
-        return nums;
-
+        return res;
     }
 }
