@@ -4,7 +4,7 @@ class Solution {
         for(int i = arr.length - 1; i >= 0; i--){
             int tmp = arr[i];
             arr[i] = maxElement;
-            maxElement = Math.max(tmp, maxElement);
+            maxElement = Math.max(maxElement, tmp);
         }
         return arr;
     }
