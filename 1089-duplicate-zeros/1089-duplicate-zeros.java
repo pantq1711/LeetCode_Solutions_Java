@@ -1,25 +1,24 @@
 class Solution {
     public void duplicateZeros(int[] arr) {
-        int possibleDups = 0;
-        int length = arr.length - 1;
-        for (int left = 0; left <= length - possibleDups; left++) {
-            if (arr[left] == 0) {
-                if (left == length - possibleDups) {
-                    arr[length] = 0; // Chép 0 vào cuối mảng
-                    length -= 1;     // Giảm phạm vi xử lý
+        int cnt = 0, length = arr.length - 1;
+        for(int i = 0; i <= length - cnt; i++){
+            if(arr[i] == 0){
+
+                if(i == length - cnt){
+                    arr[length] = 0;
+                    length--;
                     break;
                 }
-                possibleDups++;
+                cnt++;
             }
         }
-        int last = length - possibleDups;
-        for(int i = last; i >= 0; i--){
+        for(int i = length - cnt; i >= 0; i--){
             if(arr[i] == 0){
-                arr[i + possibleDups] = 0;
-                possibleDups--;
-                arr[i + possibleDups] = 0;
+                arr[i + cnt] = 0;
+                cnt--;
+                arr[i + cnt] = 0;
             }
-            else arr[i + possibleDups] = arr[i];
+            else arr[i + cnt] = arr[i];
         }
     }
 }
