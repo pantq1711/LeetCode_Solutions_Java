@@ -9,9 +9,7 @@ class Solution {
         return sum;
     }
     public boolean isHappy(int n) {
-        HashSet<Integer> set = new HashSet<>();
-        while(n != 1 && !set.contains(n)){
-            set.add(n);
+        while(n != 1 && n != 4){
             n = sumNum(n);
         }
         return n == 1;
