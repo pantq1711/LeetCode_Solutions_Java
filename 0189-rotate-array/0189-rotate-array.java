@@ -1,9 +1,16 @@
 class Solution {
     public void rotate(int[] nums, int k) {
-        int[] res = new int[nums.length];
-        for(int i = 0; i < nums.length; i++){
-            res[(i + k) % nums.length] = nums[i];
+        rotate(0, nums.length - 1, nums);
+        rotate(0, k - 1, nums);
+        rotate(k, nums.length - 1, nums);
+    }
+    private void rotate(int l, int r, int[] nums){
+        while(l < r){
+            int tmp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = tmp;
+            l++;
+            r--;
         }
-        System.arraycopy(res, 0, nums, 0, nums.length );
     }
 }
