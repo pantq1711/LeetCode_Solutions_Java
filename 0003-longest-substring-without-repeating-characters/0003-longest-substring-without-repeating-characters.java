@@ -8,7 +8,7 @@ class Solution {
                 left = Math.max(left, map.get(c) + 1);
             }
             map.put(c, right);
-            maxLen = Math.max(maxLen, right - left + 1);
+            maxLen = Math.max(right - left + 1, maxLen);
         }
         return maxLen;
     }
