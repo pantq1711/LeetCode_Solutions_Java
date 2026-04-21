@@ -2,16 +2,15 @@ class Solution {
     public int subarraysDivByK(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, 1);
-        int curSum = 0;
-        int cnt = 0;
+        int res = 0, sum = 0;
         for(int num : nums){
-            curSum += num;
-            int rem = (curSum % k + k) % k;
-            if(map.containsKey(rem)){
-                cnt += map.get(rem);
+            sum += num;
+            int numDiv = (sum % k + k) % k;
+            if(map.containsKey(numDiv)){
+                res += map.get(numDiv);
             }
-            map.put(rem, map.getOrDefault(rem, 0) + 1);
+            map.put(numDiv, map.getOrDefault(numDiv, 0) + 1);
         }
-        return cnt;
+        return res;
     }
 }
