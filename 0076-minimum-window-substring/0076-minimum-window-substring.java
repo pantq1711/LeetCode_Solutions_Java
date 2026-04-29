@@ -1,14 +1,14 @@
 class Solution {
     public String minWindow(String s, String t) {
+        int count = 0;
         int[] cnt = new int[128];
+        int minLen = Integer.MAX_VALUE;
+        int startIndex = 0;
         for(char c : t.toCharArray()){
             cnt[c]++;
         }
-        int count = 0;
         int left = 0;
-        int right = 0;
-        int startIndex = 0, minLen = Integer.MAX_VALUE;
-        while(right < s.length()){
+        for(int right = 0; right < s.length(); right++){
             char c = s.charAt(right);
             cnt[c]--;
             if(cnt[c] >= 0) count++;
@@ -18,12 +18,10 @@ class Solution {
                     startIndex = left;
                 }
                 cnt[s.charAt(left)]++;
-                if(cnt[s.charAt(left)] >= 1) count--;
+                if(cnt[s.charAt(left)] == 1) count--;
                 left++;
             }
-            right++;
         }
-        return (minLen == Integer.MAX_VALUE)  ? "" : s.substring(startIndex,startIndex + minLen);
-
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(startIndex, startIndex + minLen);
     }
 }
