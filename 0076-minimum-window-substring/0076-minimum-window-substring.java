@@ -18,7 +18,7 @@ class Solution {
                     startIndex = left;
                 }
                 cnt[s.charAt(left)]++;
-                if(cnt[s.charAt(left)] == 1) count--;
+                if(cnt[s.charAt(left)] >= 1) count--;
                 left++;
             }
             right++;
