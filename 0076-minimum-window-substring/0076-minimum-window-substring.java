@@ -13,7 +13,7 @@ class Solution {
             cnt[c]--;
             if(cnt[c] >= 0) count++;
             while(count == t.length()){
-                if(right - left + 1 < minLen){
+                if(minLen > right - left + 1){
                     minLen = right - left + 1;
                     startIndex = left;
                 }
