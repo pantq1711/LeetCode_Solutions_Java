@@ -10,7 +10,7 @@ class Solution {
                 return isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1);
             }
         }
-        return isPalindrome(s, 0, s.length() - 1);
+        return true;
     }
         public boolean isPalindrome(String s, int left, int right){
         while(left < right){
