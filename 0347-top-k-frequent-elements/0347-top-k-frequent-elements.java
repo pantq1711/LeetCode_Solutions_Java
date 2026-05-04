@@ -4,24 +4,11 @@ class Solution {
         for(int num : nums){
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
-        List<Integer>[] bucket = new ArrayList[nums.length + 1];
-        for(int key : map.keySet()){
-            int freq = map.get(key);
-            if(bucket[freq] == null){
-                bucket[freq] = new ArrayList<>();
-            }
-            bucket[freq].add(key);
-        }
-        int[] res = new int[k];
-        int count = 0;
-        for(int i = bucket.length - 1; i >= 0; i--){
-            if(bucket[i] != null){
-                for(int num : bucket[i]){
-                    res[count++] = num;
-                    if(count == k) return res;
-                }
-            }
-        }
-        return res;
+
+        return map.entrySet().stream()
+                .sorted(Map.Entry.<Integer,Integer>comparingByValue().reversed())
+                .limit(k)
+                .mapToInt(Map.Entry::getKey)
+                .toArray();
     }
 }
