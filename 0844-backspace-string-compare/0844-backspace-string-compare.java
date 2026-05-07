@@ -1,16 +1,37 @@
 class Solution {
-    public String backSpacing(String s){
-        StringBuilder res = new StringBuilder();
-        for(int i = 0; i < s.length(); i++){
-            if(!res.isEmpty() && s.charAt(i) == '#'){
-                res = new StringBuilder(res.substring(0, res.length() - 1));
-            }
-            else if(s.charAt(i) != '#') res.append(s.charAt(i));
-        }
-        return res.toString();
-    }
-
     public boolean backspaceCompare(String s, String t) {
-        return backSpacing(s).equals(backSpacing(t));
+        int i = s.length() - 1, j = t.length() - 1;
+        int skipS = 0, skipT = 0;
+        while(i >= 0 || j >= 0){
+            while(i >= 0){
+                if(s.charAt(i) == '#'){
+                    skipS++;
+                    i--;
+                }
+                else if(skipS > 0){
+                    i--;
+                    skipS--;
+                }
+                else break;
+            }
+            while(j >= 0){
+                if(t.charAt(j) == '#'){
+                    skipT++;
+                    j--;
+                }
+                else if(skipT > 0){
+                    j--;
+                    skipT--;
+                }
+                else break;
+            }
+
+            if(i >= 0 && j >= 0 && s.charAt(i) != t.charAt(j)) return false;
+            if(i >= 0 && j < 0) return  false;
+            if(j >= 0 && i < 0) return false;
+            i--;
+            j--;
+        }
+        return true;
     }
 }
