@@ -1,9 +1,9 @@
 class Solution {
     public String decodeString(String s) {
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<StringBuilder> stack2 = new Stack<>();
         int curNum = 0;
         StringBuilder curStr = new StringBuilder();
-        Stack<Integer> num = new Stack<>();
-        Stack<StringBuilder> stringBuilders = new Stack<>();
         for(int i = 0; i < s.length(); i++){
             char c = s.charAt(i);
             if(Character.isDigit(c)){
@@ -13,20 +13,19 @@ class Solution {
                 curStr.append(c);
             }
             else if(c == '['){
-                num.push(curNum);
-                stringBuilders.push(curStr);
+                stack1.push(curNum);
+                stack2.push(curStr);
                 curNum = 0;
                 curStr = new StringBuilder();
             }
             else {
-                int count = num.pop();
-                StringBuilder str = stringBuilders.pop();
-                for(int j = 0; j < count; j++){
-                    str.append(curStr);
+                StringBuilder tmp = stack2.pop();
+                int cnt = stack1.pop();
+                for(int j = 0; j < cnt; j++){
+                    tmp.append(curStr);
                 }
-                curStr = str;
+                curStr = tmp;
             }
-
         }
         return curStr.toString();
     }
