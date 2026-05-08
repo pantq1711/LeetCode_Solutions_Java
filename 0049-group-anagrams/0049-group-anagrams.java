@@ -3,14 +3,16 @@ class Solution {
         Map<String, List<String>> map = new HashMap<>();
         List<List<String>> res = new ArrayList<>();
         for(String str : strs){
-            char[] tmp = str.toCharArray();
-            Arrays.sort(tmp);
-            String key = new String(tmp);
-            map.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
+            int[] cnt = new int[26];
+            for(char c : str.toCharArray()){
+                cnt[c - 'a']++;
+            }
+            StringBuilder key = new StringBuilder();
+            for(int i = 0; i < 26; i++){
+                key.append(cnt[i] + "#");
+            }
+            map.computeIfAbsent(key.toString(), k -> new ArrayList<>()).add(str);
         }
-        for(Map.Entry<String, List<String>> mp : map.entrySet()){
-            res.add(mp.getValue());
-        }
-        return res;
+        return new ArrayList<>(map.values());
     }
 }
