@@ -1,24 +1,31 @@
 class Solution {
     public String minWindow(String s, String t) {
-        int[] cnt = new int[256];
+        Map<Character, Integer> targetMap = new HashMap<>();
         for(char c : t.toCharArray()){
-            cnt[c]++;
+            targetMap.put(c , targetMap.getOrDefault(c, 0) + 1);
         }
-        int count = 0;
+        Map<Character, Integer> windowMap = new HashMap<>();
         int left = 0;
+        int charCount = 0;
         int start = 0;
         int len = Integer.MAX_VALUE;
         for(int right = 0; right < s.length(); right++){
             char c = s.charAt(right);
-            cnt[c]--;
-            if(cnt[c] >= 0) count++;
-            while(count == t.length()){
-                if(right - left + 1 < len){
-                    len = right - left + 1;
+            windowMap.put(c, windowMap.getOrDefault(c, 0) + 1);
+            if(targetMap.containsKey(c) && targetMap.get(c).equals(windowMap.get(c))){
+                charCount++;
+            }
+            while(charCount == targetMap.size()){
+                int windowLen = right - left + 1;
+                if(windowLen < len){
+                    len = windowLen;
                     start = left;
                 }
-                cnt[s.charAt(left)]++;
-                if(cnt[s.charAt(left)] == 1) count--;
+                char leftChar = s.charAt(left);
+                if(targetMap.containsKey(leftChar) && targetMap.get(leftChar).equals(windowMap.get(leftChar))){
+                    charCount--;
+                }
+                windowMap.put(leftChar, windowMap.get(leftChar) - 1);
                 left++;
             }
         }
